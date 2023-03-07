@@ -11,6 +11,7 @@ import (
 	_ "github.com/mattermost/mattermost-server/v6/app/slashcommands"
 	// Plugins
 	_ "github.com/mattermost/mattermost-server/v6/model/oauthproviders/gitlab"
+	_ "github.com/mattermost/mattermost-server/v6/model/oauthproviders/openid"
 
 	// Enterprise Imports
 	_ "github.com/mattermost/mattermost-server/v6/imports"
