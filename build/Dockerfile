@@ -8,7 +8,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV PATH="/mattermost/bin:${PATH}"
 ARG PUID=2000
 ARG PGID=2000
-ARG MM_PACKAGE="https://releases.mattermost.com/7.8.1/mattermost-7.8.1-linux-amd64.tar.gz?src=docker"
+
+ADD $MM_PACKAGE .
 
 # # Install needed packages and indirect dependencies
 RUN apt-get update \
@@ -81,8 +82,6 @@ RUN apt-get update \
 RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
   && addgroup -gid ${PGID} mattermost \
   && adduser -q --disabled-password --uid ${PUID} --gid ${PGID} --gecos "" --home /mattermost mattermost \
-  && if [ -n "$MM_PACKAGE" ]; then curl $MM_PACKAGE | tar -xvz ; \
-  else echo "please set the MM_PACKAGE" ; exit 127 ; fi \
   && chown -R mattermost:mattermost /mattermost /mattermost/data /mattermost/plugins /mattermost/client/plugins
 
 # We should refrain from running as privileged user
