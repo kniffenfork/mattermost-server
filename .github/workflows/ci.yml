@@ -94,8 +94,8 @@ jobs:
           DOCKER_CLI_EXPERIMENTAL: enabled
         run: |
           export TAG=$(echo "${{ github.event.pull_request.head.sha || github.sha }}" | cut -c1-7)
+          cp dist/mattermost-team-linux-amd64.tar.gz build/
           cd build
           export DOCKER_CLI_EXPERIMENTAL=enabled
-          cp ../dist/mattermost-team-linux-amd64.tar.gz .
           docker buildx build --push --build-arg MM_PACKAGE=$MM_PACKAGE -t ${{ secrets.DOCKERHUB_USERNAME }}/mattermost:${TAG} .
 
