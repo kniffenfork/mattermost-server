@@ -11,3 +11,13 @@ type LdapSyncInterface interface {
 	MakeWorker() model.Worker
 	MakeScheduler() model.Scheduler
 }
+
+var theLdapSyncInterface LdapSyncInterface
+
+func RegisterLdapSyncInterface(newInterface LdapSyncInterface) {
+	theLdapSyncInterface = newInterface
+}
+
+func GetLdapSyncInterface() LdapSyncInterface {
+	return theLdapSyncInterface
+}
