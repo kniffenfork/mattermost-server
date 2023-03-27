@@ -9,7 +9,7 @@ ENV PATH="/mattermost/bin:${PATH}"
 ARG PUID=2000
 ARG PGID=2000
 
-ADD $MM_PACKAGE .
+ADD ../dist/mattermost-team-linux-arm64.tar.gz .
 
 # # Install needed packages and indirect dependencies
 RUN apt-get update \
