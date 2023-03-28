@@ -16,7 +16,7 @@ jobs:
       - name: Checkout mattermost-webapp
         run: |
           cd ..
-          git clone --depth=1 --no-single-branch https://github.com/qiwi-forks/mattermost-webapp.git
+          git clone --depth=1 --no-single-branch https://github.com/kniffenfork/mattermost-webapp.git
           cd mattermost-webapp
           git checkout $GITHUB_HEAD_REF || git checkout master
           export WEBAPP_GIT_COMMIT=$(git rev-parse HEAD)
@@ -94,8 +94,8 @@ jobs:
           DOCKER_CLI_EXPERIMENTAL: enabled
         run: |
           export TAG=$(echo "${{ github.event.pull_request.head.sha || github.sha }}" | cut -c1-7)
+          ls
           cd build
           export DOCKER_CLI_EXPERIMENTAL=enabled
-          export MM_PACKAGE=../dist/mattermost-team-linux-amd64.tar.gz
-          docker buildx build --push --build-arg MM_PACKAGE=$MM_PACKAGE -t mattermost/mm-te-test:${TAG} .
+          docker buildx build --push --build-arg MM_PACKAGE=$MM_PACKAGE -t ${{ secrets.DOCKERHUB_USERNAME }}/mattermost:${TAG} .
 

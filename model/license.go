@@ -182,7 +182,7 @@ func (f *Features) SetDefaults() {
 	}
 
 	if f.OpenId == nil {
-		f.OpenId = NewBool(*f.FutureFeatures)
+		f.OpenId = NewBool(true)
 	}
 
 	if f.Compliance == nil {
